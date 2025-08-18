@@ -14,10 +14,17 @@ use App\Http\Controllers\Admin\HomeSectionController as AdminHomeSectionControll
 use App\Http\Controllers\Admin\AboutSectionController as AdminAboutSectionController;
 use App\Http\Controllers\Admin\OfferingSectionController as AdminOfferingSectionController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\FeatureController as AdminFeatureController;
+use App\Http\Controllers\Admin\SpecificationCategoryController as AdminSpecificationCategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\QuilUploadController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+
+Route::post('/quill-upload', [QuilUploadController::class, 'store'])->name('quill.upload');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
@@ -76,15 +83,21 @@ Route::prefix('admin')->group(function () {
         Route::post('/article-category/store', [AdminArticleCategoryController::class, 'store'])->name('admin.article-category.store');
         Route::put('/article-category/update', [AdminArticleCategoryController::class, 'update'])->name('admin.article-category.update');
         Route::delete('/article-category/delete/{id}', [AdminArticleCategoryController::class, 'destroy'])->name('admin.article-category.destroy');
-        Route::get('/article-category', [AdminArticleCategoryController::class, 'index'])->name('admin.article-category.index');
-        Route::post('/article-category/store', [AdminArticleCategoryController::class, 'store'])->name('admin.article-category.store');
-        Route::put('/article-category/update', [AdminArticleCategoryController::class, 'update'])->name('admin.article-category.update');
-        Route::delete('/article-category/delete/{id}', [AdminArticleCategoryController::class, 'destroy'])->name('admin.article-category.destroy');
 
         Route::get('/article', [AdminArticleController::class, 'index'])->name('admin.article.index');
         Route::post('/article/store', [AdminArticleController::class, 'store'])->name('admin.article.store');
         Route::put('/article/update', [AdminArticleController::class, 'update'])->name('admin.article.update');
         Route::delete('/article/delete/{id}', [AdminArticleController::class, 'destroy'])->name('admin.article.destroy');
+
+        Route::get('/feature', [AdminFeatureController::class, 'index'])->name('admin.feature.index');
+        Route::post('/feature/store', [AdminFeatureController::class, 'store'])->name('admin.feature.store');
+        Route::put('/feature/update', [AdminFeatureController::class, 'update'])->name('admin.feature.update');
+        Route::delete('/feature/delete/{id}', [AdminFeatureController::class, 'destroy'])->name('admin.feature.destroy');
+
+        Route::get('/specification-category', [AdminSpecificationCategoryController::class, 'index'])->name('admin.specification-category.index');
+        Route::post('/specification-category/store', [AdminSpecificationCategoryController::class, 'store'])->name('admin.specification-category.store');
+        Route::put('/specification-category/update', [AdminSpecificationCategoryController::class, 'update'])->name('admin.specification-category.update');
+        Route::delete('/specification-category/delete/{id}', [AdminSpecificationCategoryController::class, 'destroy'])->name('admin.specification-category.destroy');
 
         Route::get('/home-section', [AdminHomeSectionController::class, 'index'])->name('admin.home-section.index');
         Route::get('/home-section/edit', [AdminHomeSectionController::class, 'edit'])->name('admin.home-section.edit');

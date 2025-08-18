@@ -111,17 +111,33 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
-        if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#search-table", {
-                searchable: true,
-                sortable: true
-            });
-            dataTable.on("datatable.update", function() {
-                feather.replace();
-                initFlowbite();
-            });
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof simpleDatatables.DataTable !== 'undefined') {
+                document.querySelectorAll("table[id^='search-table']").forEach(function(table) {
+                    const dataTable = new simpleDatatables.DataTable(table, {
+                        searchable: true,
+                        sortable: true
+                    });
+
+                    function refreshIconsAndUI() {
+                        setTimeout(() => {
+                            feather.replace();
+                            initFlowbite();
+                        }, 0);
+                    }
+
+                    dataTable.on("datatable.page", refreshIconsAndUI);
+                    dataTable.on("datatable.sort", refreshIconsAndUI);
+                    dataTable.on("datatable.search", refreshIconsAndUI);
+                    dataTable.on("datatable.update", refreshIconsAndUI);
+
+                    refreshIconsAndUI();
+                });
+            }
+        });
     </script>
+
+
     <script>
         feather.replace();
     </script>

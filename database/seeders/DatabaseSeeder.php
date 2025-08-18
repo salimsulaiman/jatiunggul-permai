@@ -6,6 +6,7 @@ use App\Models\AboutSection;
 use App\Models\HomeSection;
 use App\Models\OfferingSection;
 use App\Models\OfferingSectionDetail;
+use App\Models\SpecificationCategory;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -72,6 +73,24 @@ class DatabaseSeeder extends Seeder
                 'button_text' => 'Ajukan Sekarang',
                 'url' => 'https://perumahanmu.id/promo/dp-nol',
                 'offering_section_id' => $section->id,
+            ],
+        ]);
+        SpecificationCategory::insert([
+            [
+                'name' => 'Pondasi',
+                'icon' => 'layers', // Feather icon
+            ],
+            [
+                'name' => 'Dinding',
+                'icon' => 'grid', // Feather icon
+            ],
+            [
+                'name' => 'Pintu & Kusen',
+                'icon' => 'package', // Feather icon
+            ],
+            [
+                'name' => 'Instalasi',
+                'icon' => 'zap', // Feather icon
             ],
         ]);
     }

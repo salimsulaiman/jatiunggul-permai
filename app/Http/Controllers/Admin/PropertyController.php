@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Models\Property;
 use App\Models\PropertyFeature;
+use App\Models\PropertySpecification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -78,7 +79,8 @@ class PropertyController extends Controller
     {
         $property = Property::where('slug', $slug)->firstOrFail();
         $features = PropertyFeature::where('property_id', $property->id)->get();
-        return view('pages.admin.property.detail', compact('property', 'features'));
+        $specifications = PropertySpecification::where('property_id', $property->id)->get();
+        return view('pages.admin.property.detail', compact('property', 'features', 'specifications'));
     }
 
     /**
@@ -106,6 +108,8 @@ class PropertyController extends Controller
 
         $validated = $request->validate($rules);
 
+        $slug = $this->generateUniqueSlug($validated['name']);
+
         $property = Property::findOrFail($validated['id']);
 
         if ($request->hasFile('image')) {
@@ -120,6 +124,7 @@ class PropertyController extends Controller
 
         $property->update([
             'name' => $validated['name'],
+            'slug' => $slug,
             'image' => $imagePath,
             'location_id' => $validated['location_id'],
             'description' => $validated['description'],

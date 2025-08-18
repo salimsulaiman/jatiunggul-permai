@@ -11,6 +11,34 @@ layer(base);
 
 @custom-variant dark (&:is(.dark *));
 
+/* Quill Dark Mode */
+.dark .ql-toolbar {
+    background-color: #1f2937; /* bg-gray-800 */
+    border-color: #374151; /* border-gray-700 */
+}
+
+.dark .ql-toolbar .ql-stroke {
+    stroke: #fff !important; /* icon garis jadi putih */
+}
+
+.dark .ql-toolbar .ql-fill {
+    fill: #fff !important; /* icon isi jadi putih */
+}
+
+.dark .ql-toolbar .ql-picker {
+    color: #374151 !important; /* teks dropdown putih */
+}
+
+.dark .ql-container {
+    background-color: #374151; /* bg-gray-900 */
+    color: #fff; /* isi editor putih */
+    border-color: #374151;
+}
+
+.dark .ql-editor.ql-blank::before {
+    color: #9ca3af; /* placeholder abu-abu terang */
+}
+
 @theme {
   --font-*: initial;
   --font-outfit: Outfit, sans-serif;
