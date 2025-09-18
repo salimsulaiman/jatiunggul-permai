@@ -21,7 +21,7 @@
                 <div class="w-full mx-auto flex flex-col">
                     <div class="w-full flex flex-col md:flex-row relative h-fit md:h-[500px] lg:h-[400px]">
                         <div
-                            class="absolute w-full max-w-6xl px-8 h-full hidden md:flex flex-col justify-center mx-auto z-10 left-0 right-0">
+                            class="absolute w-full max-w-7xl px-8 h-full hidden md:flex flex-col justify-center mx-auto z-10 left-0 right-0">
                             <h1 class="text-slate-400 text-sm uppercase">About Us</h1>
                             <p class="max-w-1/2 pe-16 text-white mt-4 leading-loose line-clamp-5">
                                 {{ $about_section->description }}
@@ -57,7 +57,7 @@
                     </div>
                     <div class="w-full p-8 bg-emerald-800">
                         <div
-                            class="w-full max-w-6xl mx-auto flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-center px-8">
+                            class="w-full max-w-7xl mx-auto flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-center px-8">
                             <div class="flex flex-col items-center sm:items-start justify-center gap-4">
                                 <h1 class="text-white text-4xl sm:text-5xl">{{ $about_section->project_completed }}+</h1>
                                 <h4 class="text-center sm:text-start text-white">Sustainable Projects Completed</h4>
@@ -68,8 +68,9 @@
                                 <h4 class="text-center sm:text-start text-white">Faster Construction Time</h4>
                             </div>
                             <div class="flex flex-col items-center sm:items-start justify-center gap-4">
-                                <h1 class="text-white text-4xl sm:text-5xl">{{ $about_section->dp }}%</h1>
-                                <h4 class="text-center sm:text-start text-white">Down Payment</h4>
+                                <h1 class="text-white text-4xl sm:text-5xl">{{ $about_section->satisfaction_percentage }}%
+                                </h1>
+                                <h4 class="text-center sm:text-start text-white">Pembeli Terpuaskan</h4>
                             </div>
                         </div>
                     </div>

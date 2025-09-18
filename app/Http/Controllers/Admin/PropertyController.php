@@ -7,6 +7,8 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Models\PropertyFeature;
 use App\Models\PropertySpecification;
+use App\Models\SpecificationCategory;
+use App\Models\TypeHouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -35,7 +37,9 @@ class PropertyController extends Controller
     {
         $locations = Location::all();
         $properties = Property::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.property.index', compact('properties', 'locations'));
+        return view('pages.admin.property.index', compact('properties', 'locations'), [
+            'page' => 'property'
+        ]);
     }
 
     /**
@@ -77,10 +81,14 @@ class PropertyController extends Controller
      */
     public function show($slug)
     {
+        $categories = SpecificationCategory::all();
         $property = Property::where('slug', $slug)->firstOrFail();
         $features = PropertyFeature::where('property_id', $property->id)->get();
         $specifications = PropertySpecification::where('property_id', $property->id)->get();
-        return view('pages.admin.property.detail', compact('property', 'features', 'specifications'));
+        $types = TypeHouse::where('property_id', $property->id)->get();
+        return view('pages.admin.property.detail', compact('property', 'features', 'specifications', 'types', 'categories'), [
+            'page' => 'property'
+        ]);
     }
 
     /**

@@ -16,7 +16,10 @@ use App\Http\Controllers\Admin\OfferingSectionController as AdminOfferingSection
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\FeatureController as AdminFeatureController;
 use App\Http\Controllers\Admin\SpecificationCategoryController as AdminSpecificationCategoryController;
+use App\Http\Controllers\Admin\PropertySpecificationController as AdminPropertySpecificationController;
+use App\Http\Controllers\Admin\TypeHouseController as AdminTypeHouseController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\QuilUploadController;
@@ -31,9 +34,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/properties', [PropertyController::class, 'index'])->name('property.index');
 Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('property.show');
 
+Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 
 Route::prefix('admin')->group(function () {
@@ -73,6 +79,14 @@ Route::prefix('admin')->group(function () {
         Route::post('/property-feature/store', [AdminPropertyFeatureController::class, 'store'])->name('admin.property-feature.store');
         Route::put('/property-feature/update', [AdminPropertyFeatureController::class, 'update'])->name('admin.property-feature.update');
         Route::delete('/property-feature/delete/{id}', [AdminPropertyFeatureController::class, 'destroy'])->name('admin.property-feature.destroy');
+
+        Route::post('/property-specification/store', [AdminPropertySpecificationController::class, 'store'])->name('admin.property-specification.store');
+        Route::put('/property-specification/update', [AdminPropertySpecificationController::class, 'update'])->name('admin.property-specification.update');
+        Route::delete('/property-specification/delete/{id}', [AdminPropertySpecificationController::class, 'destroy'])->name('admin.property-specification.destroy');
+
+        Route::post('/type-house/store', [AdminTypeHouseController::class, 'store'])->name('admin.type-house.store');
+        Route::put('/type-house/update', [AdminTypeHouseController::class, 'update'])->name('admin.type-house.update');
+        Route::delete('/type-house/delete/{id}', [AdminTypeHouseController::class, 'destroy'])->name('admin.type-house.destroy');
 
         Route::get('/faq', [FaqController::class, 'index'])->name('admin.faq.index');
         Route::post('/faq/store', [FaqController::class, 'store'])->name('admin.faq.store');

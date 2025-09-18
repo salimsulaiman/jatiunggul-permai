@@ -19,7 +19,7 @@
             <div
                 class="w-full min-h-[64vw] sm:min-h-[48vw] md:min-h-[28vw] rounded-xl bg-slate-100 relative overflow-hidden">
                 <div class="w-full bg-white" id="offering">
-                    <div class="w-full max-w-6xl px-4 sm:px-8 pt-4 mx-auto">
+                    <div class="w-full max-w-7xl px-4 sm:px-8 pt-4 mx-auto">
                         <h1 class="text-slate-400 text-sm uppercase text-start sm:text-center">Our Key Offerings</h1>
                         <h2
                             class="text-slate-700 font-bold text-2xl sm:text-3xl max-w-lg leading-normal mt-4 mb-0 sm:mb-12 text-start sm:text-center mx-auto">

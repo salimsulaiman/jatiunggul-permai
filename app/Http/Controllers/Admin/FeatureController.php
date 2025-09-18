@@ -14,7 +14,9 @@ class FeatureController extends Controller
     public function index()
     {
         $features = Feature::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.feature.index', compact('features'));
+        return view('pages.admin.feature.index', compact('features'), [
+            'page' => 'feature'
+        ]);
     }
 
     /**
@@ -30,17 +32,16 @@ class FeatureController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $rules = [
             'title' => 'required|string|max:255',
-            'icon' => 'required|file|mimes:jpg,jpeg,png,svg,gif|max:2048',
+            'icon' => 'required|string|max:255',
             'description' => 'required|string',
-        ]);
+        ];
 
 
-        Feature::create([
-            ...$validated,
-            'icon' => $request->file('icon')->store('feature_images', 'public'),
-        ]);
+        $validated = $request->validate($rules);
+
+        Feature::create($validated);
 
         return redirect()->route('admin.feature.index')->with('success', 'Feature created successfully.');
     }
@@ -64,16 +65,43 @@ class FeatureController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'id' => 'required|exists:features,id',
+            'title' => 'required|string|max:255',
+            'icon' => 'required|string|max:255',
+            'description' => 'required|string',
+        ];
+
+        $validated = $request->validate($rules);
+
+        $feature = Feature::findOrFail($validated['id']);
+
+        $feature->update([
+            'title' => $validated['title'],
+            'icon' => $validated['icon'],
+            'description' => $validated['description']
+        ]);
+
+        return redirect()->route('admin.feature.index')->with('success', 'Feature updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+
+        $rules = [
+            'id' => 'required|exists:features,id',
+        ];
+
+        $validated = $request->validate($rules);
+
+        $feature = Feature::findOrFail($validated['id']);
+        $feature->delete();
+
+        return redirect()->route('admin.feature.index')->with('success', 'Feature deleted successfully.');
     }
 }

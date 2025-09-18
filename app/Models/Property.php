@@ -34,4 +34,9 @@ class Property extends Model
     {
         return $this->hasMany(PropertySpecification::class);
     }
+
+    public function typeHouses()
+    {
+        return $this->hasMany(TypeHouse::class);
+    }
 }

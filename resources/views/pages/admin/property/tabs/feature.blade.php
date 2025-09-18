@@ -30,8 +30,7 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form class="w-full" method="POST" action="{{ route('admin.property-feature.store') }}"
-                            enctype="multipart/form-data">
+                        <form class="w-full" method="POST" action="{{ route('admin.property-feature.store') }}">
                             @csrf
                             <div class="p-4 md:p-5 space-y-4">
                                 <input type="hidden" name="property_id" value="{{ $property->id }}">
@@ -170,35 +169,10 @@
                                     </div>
                                     <div class="mb-5">
                                         <label for="icon"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icon</label>
-
-                                        <div class="flex items-center justify-center w-full relative">
-                                            <div
-                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg bg-gray-100 dark:bg-gray-700 p-4">
-                                                @if ($feature->icon)
-                                                    <img src="{{ asset('storage/' . $feature->icon) }}"
-                                                        alt="Icon Preview"
-                                                        class="object-contain h-full w-full rounded-lg" />
-                                                @else
-                                                    <div
-                                                        class="flex flex-col items-center justify-center pt-5 pb-6 text-center">
-                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 20 16">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5
-                                                                                                                                                                            5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4
-                                                                                                                                                                            0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                        </svg>
-                                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                            <span class="font-semibold">No icon
-                                                                available</span>
-                                                        </p>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Icon</label>
+                                        <i data-feather="{{ $feature->icon }}"
+                                            class="size-10 text-slate-600 dark:text-white"></i>
                                     </div>
 
                                     <div class="">
@@ -245,7 +219,7 @@
                             </div>
                             <!-- Modal body -->
                             <form class="w-full" action="{{ route('admin.property-feature.update') }}"
-                                method="POST" enctype="multipart/form-data">
+                                method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="p-4 md:p-5 space-y-4">
@@ -258,55 +232,16 @@
                                             value="{{ $feature->feature }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                     </div>
-                                    <div class="mb-5" x-data="iconPreview('{{ old('icon') ?? ($feature->icon ?? '') }}', 'dropzone-file-edit')" x-init="init()">
+                                    <div class="mb-5">
                                         <label for="icon"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icon</label>
-
-                                        <div class="flex items-center justify-center w-full relative">
-                                            <template x-if="previewUrl">
-                                                <button type="button" @click="removeImage"
-                                                    class="p-1 text-sm rounded-full bg-red-500 hover:bg-red-600 text-white absolute top-2 right-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M18 6L6 18M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            </template>
-
-                                            <label for="dropzone-file-edit"
-                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-4">
-
-                                                <template x-if="previewUrl">
-                                                    <img :src="previewUrl" alt="Preview"
-                                                        class="object-contain h-full w-full rounded-lg" />
-                                                </template>
-
-                                                <template x-if="!previewUrl">
-                                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 20 16">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4
-                                                                                                                                            0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                        </svg>
-                                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                            <span class="font-semibold">Click to
-                                                                upload</span> or
-                                                            drag and drop
-                                                        </p>
-                                                        <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                            SVG, PNG, JPG or GIF (MAX. 800x400px)
-                                                        </p>
-                                                    </div>
-                                                </template>
-
-                                                <input id="dropzone-file-edit" type="file" class="hidden"
-                                                    name="icon" @change="previewImage" />
-                                            </label>
-                                        </div>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Icon</label>
+                                        <input type="text" id="icon" name="icon"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            value="{{ $feature->icon }}" />
+                                        <h4 class="text-xs text-green-500 mt-2">All icon name can be find in
+                                            feather-icon
+                                        </h4>
                                     </div>
 
                                     <div class="">

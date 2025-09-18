@@ -15,7 +15,9 @@ class AboutSectionController extends Controller
     public function index()
     {
         $about_section = AboutSection::first();
-        return view('pages.admin.section.about.index', compact('about_section'));
+        return view('pages.admin.section.about.index', compact('about_section'), [
+            'page' => 'about_section'
+        ]);
     }
 
     /**
@@ -49,7 +51,9 @@ class AboutSectionController extends Controller
     {
         $about_section = AboutSection::first();
 
-        return view('pages.admin.section.about.edit', compact('about_section'));
+        return view('pages.admin.section.about.edit', compact('about_section'), [
+            'page' => 'about_section'
+        ]);
     }
 
     /**
@@ -62,7 +66,7 @@ class AboutSectionController extends Controller
             'image' => 'nullable|file|mimes:jpg,jpeg,png,svg,gif|max:2048',
             'project_completed' => 'required|numeric|max:99999',
             'project_duration' => 'required|numeric|max:999',
-            'dp' => 'required|numeric|max:999',
+            'satisfaction_percentage' => 'required|numeric|max:999',
         ];
 
         $validated = $request->validate($rules);
@@ -84,7 +88,7 @@ class AboutSectionController extends Controller
             'image' => $imagePath,
             'project_completed' => $validated['project_completed'],
             'project_duration' => $validated['project_duration'],
-            'dp' => $validated['dp'],
+            'satisfaction_percentage' => $validated['satisfaction_percentage'],
         ]);
 
         return redirect()->route('admin.about-section.index')->with('success', 'About Section updated successfully.');

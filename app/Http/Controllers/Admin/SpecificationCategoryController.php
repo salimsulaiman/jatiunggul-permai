@@ -14,7 +14,9 @@ class SpecificationCategoryController extends Controller
     public function index()
     {
         $specifications = SpecificationCategory::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.specification_category.index', compact('specifications'));
+        return view('pages.admin.specification_category.index', compact('specifications'), [
+            'page' => 'specification'
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 @import "flowbite/src/themes/default";
 
 @plugin "flowbite/plugin";
+@plugin "@tailwindcss/typography";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -21,4 +22,13 @@
     --color-saltpan-50: #edf5f2;
     --color-marshland-960: #191c19;
     --color-wilds-sand-50: #f3f3f4;
+}
+
+#offering span {
+  color: #047857; /* Tailwind's emerald-700 */
+  font-weight: 700; /* Bold */
+}
+
+[x-cloak] {
+    display: none !important;
 }

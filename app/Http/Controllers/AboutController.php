@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutSection;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -11,7 +12,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return view('pages.about.about');
+        $aboutSection = AboutSection::first();
+        return view('pages.about.about', compact('aboutSection'));
     }
 
     /**

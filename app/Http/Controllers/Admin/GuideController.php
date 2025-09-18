@@ -15,7 +15,9 @@ class GuideController extends Controller
     public function index()
     {
         $guides = Guide::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.guide.index', compact('guides'));
+        return view('pages.admin.guide.index', compact('guides'), [
+            'page' => 'guide'
+        ]);
     }
 
     /**

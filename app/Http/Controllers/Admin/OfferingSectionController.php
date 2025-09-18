@@ -16,7 +16,9 @@ class OfferingSectionController extends Controller
     public function index()
     {
         $offering_section = OfferingSection::first();
-        return view('pages.admin.section.offering.index', compact('offering_section'));
+        return view('pages.admin.section.offering.index', compact('offering_section'), [
+            'page' => 'offering_section'
+        ]);
     }
 
     /**
@@ -50,7 +52,9 @@ class OfferingSectionController extends Controller
     {
         $offering_section = OfferingSection::first();
 
-        return view('pages.admin.section.offering.edit', compact('offering_section'));
+        return view('pages.admin.section.offering.edit', compact('offering_section'), [
+            'page' => 'offering_section'
+        ]);
     }
 
     /**

@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'image' => null,
             'project_completed' => 100,
             'project_duration' => 3,
-            'dp' => 30
+            'satisfaction_percentage' => 95
         ]);
 
         OfferingSection::create([

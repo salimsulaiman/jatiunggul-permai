@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('type_houses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('property_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('image')->nullable();

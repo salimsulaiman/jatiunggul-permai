@@ -1,6 +1,6 @@
 @extends('components.layouts.admin.app')
 @section('content')
-    <div x-data="{ pageName: `Location` }">
+    <div x-data="{ pageName: `Feature` }">
         @include('components.admin.breadcrumb')
     </div>
     <div
@@ -16,7 +16,7 @@
         @endif
         <div class="w-full flex items-center justify-between mb-4">
             <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
-                Location Data
+                Feature Data
             </h3>
             <div class="flex gap-2 items-center">
                 <button class="px-4 py-2 text-sm rounded-xl bg-sky-700 hover:bg-sky-800 text-white "
@@ -56,55 +56,15 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             value="{{ old('title') }}" />
                                     </div>
-                                    <div class="mb-5" x-data="iconPreview()" x-init="init()">
+                                    <div class="mb-5">
                                         <label for="icon"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icon</label>
-
-                                        <div class="flex items-center justify-center w-full relative">
-
-                                            <template x-if="previewUrl">
-                                                <button type="button" @click="removeImage"
-                                                    class="p-1 text-sm rounded-full bg-red-500 hover:bg-red-600 text-white absolute top-2 right-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M18 6L6 18M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            </template>
-                                            <label for="dropzone-file"
-                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-4">
-
-                                                <template x-if="previewUrl">
-                                                    <img :src="previewUrl" alt="Preview"
-                                                        class="object-contain h-full w-full rounded-lg" />
-                                                </template>
-
-                                                <template x-if="!previewUrl">
-                                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 20 16">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                        </svg>
-                                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                            <span class="font-semibold">Click to upload</span> or
-                                                            drag and drop
-                                                        </p>
-                                                        <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                            SVG, PNG, JPG or GIF (MAX. 800x400px)
-                                                        </p>
-                                                    </div>
-                                                </template>
-
-                                                <input id="dropzone-file" type="file" class="hidden" name="icon"
-                                                    @change="previewImage" />
-                                            </label>
-                                        </div>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Icon</label>
+                                        <input type="text" id="icon" name="icon"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            value="{{ old('icon') }}" />
+                                        <h4 class="text-xs text-green-500 mt-2">All icon name can be find in feather-icon
+                                        </h4>
                                     </div>
 
                                     <div class="">
@@ -162,10 +122,7 @@
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $feature->title }}
                             </td>
                             <td>
-                                <div class="w-16 h-16 rounded-xl relative overflow-hidden">
-                                    <img src="{{ asset('storage/' . $feature->icon) }}" alt="img-{{ $feature->feature }}"
-                                        class="w-full h-full object-cover object-center">
-                                </div>
+                                <i data-feather="{{ $feature->icon }}" class="size-5 text-slate-600 dark:text-white"></i>
                             </td>
                             <td class="line-clamp-3">{{ $feature->description }}</td>
                             <td class="w-px whitespace-nowrap">
@@ -218,13 +175,27 @@
                                     <!-- Modal body -->
                                     <div class="w-full">
                                         <div class="p-4 md:p-5 space-y-4">
-                                            <div class="w-full">
-                                                <label for="name"
+                                            <div class="mb-5">
+                                                <label for="title"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Location</label>
-                                                <input type="text" id="name" name="name"
-                                                    value="{{ $feature->name }}" readonly
+                                                    Title</label>
+                                                <input type="text" id="title" name="title"
+                                                    value="{{ $feature->title }}" readonly
                                                     class="bg-gray-50 border border-gray-300 read-only:bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="icon"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Icon</label>
+                                                <i data-feather="{{ $feature->icon }}"
+                                                    class="size-10 text-slate-600 dark:text-white"></i>
+                                            </div>
+                                            <div class="">
+                                                <label for="description"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                                <textarea id="description" rows="4" name="description" readonly
+                                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 read-only:bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Write property description here...">{{ $feature->description }}</textarea>
                                             </div>
                                         </div>
                                         <!-- Modal footer -->
@@ -249,7 +220,7 @@
                                     <div
                                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                            Update Location
+                                            Update Feature
                                         </h3>
                                         <button type="button"
                                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -264,18 +235,36 @@
                                         </button>
                                     </div>
                                     <!-- Modal body -->
-                                    <form class="w-full" action="{{ route('admin.location.update') }}" method="POST">
+                                    <form class="w-full" action="{{ route('admin.feature.update') }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="p-4 md:p-5 space-y-4">
-                                            <div class="w-full">
-                                                <input type="hidden" name="id" value="{{ $feature->id }}">
-                                                <label for="name"
+                                            <input type="hidden" name="id" value="{{ $feature->id }}">
+                                            <div class="mb-5">
+                                                <label for="title"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Location</label>
-                                                <input type="text" id="name" name="name"
-                                                    value="{{ $feature->name }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                                    Title</label>
+                                                <input type="text" id="title" name="title"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ old('title', $feature->title) }}" />
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="icon"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Icon</label>
+                                                <input type="text" id="icon" name="icon"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ old('icon', $feature->icon) }}" />
+                                                <h4 class="text-xs text-green-500 mt-2">All icon name can be find in
+                                                    feather-icon
+                                                </h4>
+                                            </div>
+                                            <div class="">
+                                                <label for="description"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                                <textarea id="description" rows="4" name="description"
+                                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Write property description here...">{{ old('description', $feature->description) }}</textarea>
                                             </div>
                                         </div>
                                         <!-- Modal footer -->
@@ -318,7 +307,7 @@
                                         </button>
                                     </div>
                                     <!-- Modal body -->
-                                    <form class="w-full" action="{{ route('admin.location.destroy', $feature->id) }}"
+                                    <form class="w-full" action="{{ route('admin.feature.destroy', $feature->id) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -327,8 +316,8 @@
                                                 <input type="hidden" name="id" value="{{ $feature->id }}">
                                                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                                     Are you sure want to delete <span
-                                                        class="font-bold">{{ $feature->name }}</span>
-                                                    location?
+                                                        class="font-bold">{{ $feature->title }}</span>
+                                                    ?
                                                     This action
                                                     cannot be undone.
                                                 </p>
@@ -353,25 +342,4 @@
             </table>
         </div>
     </div>
-@endsection
-@section('script')
-    <script>
-        function iconPreview(initialUrl = null, inputId = 'dropzone-file') {
-            return {
-                previewUrl: initialUrl && initialUrl !== '' ? `/storage/${initialUrl}` : null,
-                inputId: inputId,
-                init() {},
-                previewImage(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        this.previewUrl = URL.createObjectURL(file);
-                    }
-                },
-                removeImage() {
-                    this.previewUrl = null;
-                    document.getElementById(this.inputId).value = null;
-                }
-            }
-        }
-    </script>
 @endsection

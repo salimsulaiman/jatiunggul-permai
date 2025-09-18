@@ -30,7 +30,9 @@ class ArticleCategoryController extends Controller
     public function index()
     {
         $article_categories = ArticleCategory::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.article_category.index', compact('article_categories'));
+        return view('pages.admin.article_category.index', compact('article_categories'), [
+            'page' => 'article_category'
+        ]);
     }
 
     /**

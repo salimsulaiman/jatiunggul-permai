@@ -30,7 +30,9 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Location::orderBy('created_at', 'desc')->get();
-        return view('pages.admin.location.index', compact('locations'));
+        return view('pages.admin.location.index', compact('locations'), [
+            'page' => 'location'
+        ]);
     }
 
     /**

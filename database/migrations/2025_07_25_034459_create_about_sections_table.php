@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('project_completed')->default(0);
             $table->integer('project_duration')->default(0);
-            $table->integer('dp')->default(0);
+            $table->integer('satisfaction_percentage')->default(0);
             $table->timestamps();
         });
     }

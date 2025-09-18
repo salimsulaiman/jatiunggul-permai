@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
+use App\Models\Property;
+use App\Models\PropertySpecification;
+use App\Models\SpecificationCategory;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -11,7 +15,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('pages.property.properties');
+        $properties = Property::with('location')->where('is_published', true)->get();
+        return view('pages.property.properties', compact('properties'));
     }
 
     /**
@@ -35,7 +40,15 @@ class PropertyController extends Controller
      */
     public function show($slug)
     {
-        return view('pages.property.detail');
+        $specification_categories = SpecificationCategory::get();
+        $property = Property::where('slug', $slug)->firstOrFail();
+        $property_specifications = $property->specifications()
+            ->with('category')
+            ->get()
+            ->keyBy('specification_category_id');
+
+        $faqs = Faq::get();
+        return view('pages.property.detail', compact('specification_categories', 'property', 'property_specifications', 'faqs'));
     }
 
     /**

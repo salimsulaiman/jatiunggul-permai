@@ -33,7 +33,9 @@ class ArticleController extends Controller
     {
         $article_categories = ArticleCategory::get();
         $articles = Article::with('category')->orderBy('created_at', 'desc')->get();
-        return view('pages.admin.article.index', compact('articles', 'article_categories'));
+        return view('pages.admin.article.index', compact('articles', 'article_categories'), [
+            'page' => 'article'
+        ]);
     }
 
     /**

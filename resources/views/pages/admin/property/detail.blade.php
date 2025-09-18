@@ -54,6 +54,12 @@
                             id="specification-tab" data-tabs-target="#specification" type="button" role="tab"
                             aria-controls="specification" aria-selected="false">Specification</button>
                     </li>
+                    <li class="me-2" role="presentation">
+                        <button
+                            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                            id="type-tab" data-tabs-target="#type" type="button" role="tab" aria-controls="type"
+                            aria-selected="false">Type</button>
+                    </li>
                 </ul>
             </div>
             <div id="property-tab-content">
@@ -66,7 +72,14 @@
                 <div class="hidden" id="specification" role="tabpanel" aria-labelledby="specification-tab">
                     @include('pages.admin.property.tabs.specification', [
                         'specifications' => $specifications,
+                        'categories' => $categories,
                         'tableId' => 'search-table-specification',
+                    ])
+                </div>
+                <div class="hidden" id="type" role="tabpanel" aria-labelledby="type-tab">
+                    @include('pages.admin.property.tabs.type', [
+                        'types' => $types,
+                        'tableId' => 'search-table-type',
                     ])
                 </div>
             </div>
@@ -75,7 +88,7 @@
 @endsection
 @section('script')
     <script>
-        function iconPreview(initialUrl = null, inputId = 'dropzone-file') {
+        function imagePreview(initialUrl = null, inputId = 'dropzone-file') {
             return {
                 previewUrl: initialUrl && initialUrl !== '' ? `/storage/${initialUrl}` : null,
                 inputId: inputId,

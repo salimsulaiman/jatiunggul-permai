@@ -2,26 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AboutSection;
-use App\Models\Feature;
-use App\Models\Guide;
-use App\Models\HomeSection;
-use App\Models\OfferingSection;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $homeSection = HomeSection::first();
-        $aboutSection = AboutSection::first();
-        $offeringSection = OfferingSection::first();
-        $guides = Guide::all();
-        $features = Feature::all();
-        return view('pages.home.index', compact('homeSection', 'aboutSection', 'offeringSection', 'guides', 'features'));
+        return view('pages.contact.index');
     }
 
     /**

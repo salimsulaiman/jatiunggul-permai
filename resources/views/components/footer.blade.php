@@ -1,11 +1,13 @@
 <footer class="w-full bg-marshland-960">
-    <div class="max-w-6xl grid grid-cols-1 md:grid-cols-5 mx-auto px-4 sm:px-8 pt-16 gap-16 md:gap-24">
+    <div class="max-w-7xl grid grid-cols-1 md:grid-cols-5 mx-auto px-4 sm:px-8 pt-16 gap-16 md:gap-24">
         <div class="w-full col-span-2">
-            <h1 class="text-white text-4xl">JATI UNGGUL</h1>
-            <p class="text-slate-300 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quo accusantium
-                aliquam laborum pariatur sed, suscipit est delectus, ratione sapiente eos id repellat nobis. Ducimus
-                nobis sit, molestiae provident fugit, mollitia tempore quos ullam error officiis perspiciatis omnis enim
-                quae consequatur veritatis totam incidunt! Maiores ut voluptates exercitationem eveniet sit.</p>
+            <h1 class="text-white text-4xl font-semibold">Jati Unggul Permai</h1>
+            <h4>PT </h4>
+            <p class="text-slate-300 mt-4">
+                Jati Unggul Permai menghadirkan hunian modern dengan legalitas lengkap,
+                lokasi strategis, dan infrastruktur memadai. Komitmen kami adalah
+                memberikan kenyamanan serta nilai investasi jangka panjang bagi para penghuni.
+            </p>
         </div>
         <div class="w-full flex flex-col gap-6">
             <div>
@@ -75,7 +77,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full flex flex-col-reverse sm:flex-row justify-between gap-8 sm:gap-4 max-w-6xl mx-auto px-8 py-8">
+    <div class="w-full flex flex-col-reverse sm:flex-row justify-between gap-8 sm:gap-4 max-w-7xl mx-auto px-8 py-8">
         <h5 class="text-slate-300 text-sm">
             &copy; 2025 - Jati Unggul Permai. All rights reserved.
         </h5>

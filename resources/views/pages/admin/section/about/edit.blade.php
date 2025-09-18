@@ -58,8 +58,8 @@
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                     stroke-width="2"
                                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5
-                                                                                                                                                                                                                                                                                                                             5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4
-                                                                                                                                                                                                                                                                                                                             0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                                                                                                                                                                                                                                                                                                     5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4
+                                                                                                                                                                                                                                                                                                                                     0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                             </svg>
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                                 <span class="font-semibold">Click to upload</span> or
@@ -100,11 +100,12 @@
                                 value="{{ $about_section->project_duration }}" />
                         </div>
                         <div class="">
-                            <label for="dp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Down Payment (%)</label>
-                            <input type="number" id="dp" name="dp"
+                            <label for="satisfaction_percentage"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Customer Satisfaction (%)</label>
+                            <input type="number" id="satisfaction_percentage" name="satisfaction_percentage"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value="{{ $about_section->dp }}" />
+                                value="{{ $about_section->satisfaction_percentage }}" />
                         </div>
                     </div>
                     <!-- Modal footer -->

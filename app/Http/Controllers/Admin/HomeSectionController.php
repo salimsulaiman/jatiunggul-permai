@@ -15,7 +15,9 @@ class HomeSectionController extends Controller
     public function index()
     {
         $home_section = HomeSection::first();
-        return view('pages.admin.section.home.index', compact('home_section'));
+        return view('pages.admin.section.home.index', compact('home_section'), [
+            'page' => 'home_section'
+        ]);
     }
 
     /**
@@ -49,7 +51,9 @@ class HomeSectionController extends Controller
     {
         $home_section = HomeSection::first();
 
-        return view('pages.admin.section.home.edit', compact('home_section'));
+        return view('pages.admin.section.home.edit', compact('home_section'), [
+            'page' => 'home_section'
+        ]);
     }
 
     /**

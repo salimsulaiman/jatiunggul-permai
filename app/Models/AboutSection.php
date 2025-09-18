@@ -11,6 +11,6 @@ class AboutSection extends Model
         'image',
         'project_completed',
         'project_duration',
-        'dp'
+        'satisfaction_percentage'
     ];
 }

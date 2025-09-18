@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Jati Unggul | Admin</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/icons/logo-square.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,7 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
 
-<body x-data="{ page: 'location', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false, 'isProfileInfoModal': false, 'isProfilePasswordModal': false, 'isProfilePictureModal': false, 'isDeleteProfilePictureModal': false, 'isProfilePictureModal': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+<body x-data="{ page: '{{ $page ?? '' }}', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false, 'isProfileInfoModal': false, 'isProfilePasswordModal': false, 'isProfilePictureModal': false, 'isDeleteProfilePictureModal': false, 'isProfilePictureModal': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" :class="{ 'dark bg-gray-900': darkMode === true }">
 
     <x-admin.preload></x-admin.preload>

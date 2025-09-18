@@ -1,4 +1,4 @@
-<nav x-data="{ scrolled: false, open: false }" x-init=" const setScrolled = () => {
+<nav x-data="{ scrolled: false, open: false }" x-cloak x-init=" const setScrolled = () => {
      if (window.innerWidth < 768) {
          scrolled = true;
      } else {
@@ -15,9 +15,9 @@
  setScrolled();
  window.addEventListener('scroll', setScrolled);
  window.addEventListener('resize', setScrolled);"
-    :class="{ 'bg-emerald-700 shadow-md py-4': scrolled, 'bg-transparent py-8': !scrolled }"
+    :class="{ 'bg-emerald-900 shadow-md py-4': scrolled, 'bg-transparent py-8': !scrolled }"
     class="w-full fixed top-0 z-50 left-0 right-0 px-4 sm:px-8 transition-all duration-300 ease-in-out">
-    <div class="max-w-6xl mx-auto flex justify-between items-center transition-all duration-300 ease-in-out"
+    <div class="max-w-7xl mx-auto flex justify-between items-center transition-all duration-300 ease-in-out"
         :class="{ 'px-0': scrolled, 'px-8': !scrolled }">
         <a href="/"><img src="{{ asset('assets/icons/logo-jatiunggul.png') }}" alt="" class="w-20"></a>
 
@@ -47,7 +47,7 @@
                 'bg-white text-emerald-800 hover:bg-slate-300': scrolled,
                 'bg-emerald-800 text-white hover:bg-green-900': !scrolled
             }"
-            class="hidden md:inline-block px-4 py-2 rounded-full">Book a consultation</a>
+            class="hidden md:inline-block px-4 py-2 rounded-full">Hubungi Kami</a>
     </div>
 
     <!-- Mobile Menu -->

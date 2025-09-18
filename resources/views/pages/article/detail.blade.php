@@ -1,14 +1,16 @@
 @extends('components.layouts.app')
 @section('content')
     <div class="w-full">
-        <div class="w-full h-[300px] md:h-[500px] bg-cover bg-top bg-no-repeat relative"
-            style="background-image: url('{{ asset('assets/images/side.jpg') }}')">
+        <div class="w-full h-[300px] md:h-[500px] bg-cover bg-center bg-no-repeat relative"
+            style="background-image: url('{{ asset('storage/' . $article->image) }}')">
+            <div class="bg-black/20 inset-0 absolute"></div>
         </div>
         <div
-            class="w-full mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 bg-white flex flex-col md:flex-row flex-wrap gap-12 lg:gap-20">
+            class="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 bg-white flex flex-col md:flex-row flex-wrap gap-12 lg:gap-20">
             <article class="flex-[5] basis-0">
-                <h4 class="mt-4 text-slate-600 text-sm">Health: January 6, 2004</h4>
-                <h1 class="mt-4 text-slate-700 text-3xl md:text-4xl leading-relaxed">5 Benefit of Warm Water for the Face
+                <h4 class="mt-4 text-slate-600 text-sm">{{ $article->category->name }}:
+                    {{ $article->created_at->format('F j, Y') }}</h4>
+                <h1 class="mt-4 text-slate-700 text-3xl md:text-4xl leading-relaxed">{{ $article->title }}
                 </h1>
                 <div class="flex gap-2 items-center mt-3 flex-wrap">
                     <h5 class="text-slate-600 text-xs">Shared with</h5>
@@ -40,57 +42,40 @@
                             </svg></a>
                     </div>
                 </div>
-                <div class="mt-4 text-slate-500 text-sm flex flex-col gap-4">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae non assumenda asperiores
-                        reiciendis debitis voluptatum aliquam doloremque earum vel. Illo vero ullam quaerat? Sunt, nulla
-                        velit natus expedita recusandae modi nemo pariatur quibusdam? Neque cum, in at necessitatibus hic a!
-                    </p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae non assumenda asperiores
-                        reiciendis debitis voluptatum aliquam doloremque earum vel. Illo vero ullam quaerat? Sunt, nulla
-                        velit natus expedita recusandae modi nemo pariatur quibusdam? Neque cum, in at necessitatibus hic a!
-                    </p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae non assumenda asperiores
-                        reiciendis debitis voluptatum aliquam doloremque earum vel. Illo vero ullam quaerat? Sunt, nulla
-                        velit natus expedita recusandae modi nemo pariatur quibusdam? Neque cum, in at necessitatibus hic a!
-                    </p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae non assumenda asperiores
-                        reiciendis debitis voluptatum aliquam doloremque earum vel. Illo vero ullam quaerat? Sunt, nulla
-                        velit natus expedita recusandae modi nemo pariatur quibusdam? Neque cum, in at necessitatibus hic a!
-                    </p>
-                    <h2 class="text-xl md:text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
-                        saepe?</h2>
-                    <img src="{{ asset('assets/images/minima.jpg') }}" alt="" class="w-full">
-                </div>
+                <article
+                    class="mt-4 prose w-full max-w-none prose-slate prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
+                    {!! $article->content !!}
+                </article>
             </article>
             <div class="flex-[2] basis-0 mt-8 md:mt-20">
-                <h4 class="text-slate-700 font-medium">Related Topic</h4>
-                <div class="flex gap-2 mt-4">
-                    <a href="#"
-                        class="text-slate-500 hover:text-slate-700 transition-colors duration-300 ease-in-out text-sm">Product</a>
-                    <a href="#"
-                        class="text-slate-500 hover:text-slate-700 transition-colors duration-300 ease-in-out text-sm">Nature</a>
-                    <a href="#"
-                        class="text-slate-500 hover:text-slate-700 transition-colors duration-300 ease-in-out text-sm">Project</a>
-                    <a href="#"
-                        class="text-slate-500 hover:text-slate-700 transition-colors duration-300 ease-in-out text-sm">Duration</a>
+                <h4 class="text-slate-700 font-medium">Topik Hangat</h4>
+                <div class="flex gap-2 mt-4 flex-wrap items-center">
+                    @foreach ($categories as $category)
+                        <a href="{{ route('article.index', ['category' => $category->slug]) }}"
+                            class="text-slate-500 hover:text-slate-700 transition-colors duration-300 ease-in-out text-sm">
+                            {{ $category->name }}
+                        </a>
+                        @if (!$loop->last)
+                            |
+                        @endif
+                    @endforeach
                 </div>
-                <h4 class="text-slate-700 font-medium mt-4">Related Article</h4>
+                <h4 class="text-slate-700 font-medium mt-4">Artikel Terkait</h4>
                 <div class="flex flex-col gap-8 md:gap-4 mt-4">
-                    @for ($i = 0; $i < 3; $i++)
-                        <a href="#" class="w-full flex flex-col gap-4 md:gap-2 overflow-hidden group">
+                    @foreach ($relatedArticles as $relatedArticle)
+                        <a href="{{ route('article.show', $relatedArticle->slug) }}"
+                            class="w-full flex flex-col gap-4 md:gap-2 overflow-hidden group">
                             <div class="aspect-video relative overflow-hidden rounded-xl">
-                                <img src="{{ asset('assets/images/outdoor.jpg') }}" alt=""
+                                <img src="{{ asset('storage/' . $relatedArticle->image) }}" alt=""
                                     class="w-full h-full object-center object-cover group-hover:scale-105 duration-300 transition-transform ease-in-out">
                             </div>
-                            <h5 class="text-xs text-slate-600">Lifestyle | Januari 12, 2025</h5>
+                            <h5 class="text-xs text-slate-600">{{ $relatedArticle->category->name }} |
+                                {{ $relatedArticle->created_at->format('F j, Y') }}</h5>
                             <h4
                                 class="text-2xl md:text-base text-slate-600 font-semibold line-clamp-2 group-hover:text-slate-700">
-                                Lorem
-                                ipsum dolor sit amet
-                                consectetur
-                                adipisicing elit. Doloribus, quis!</h4>
+                                {{ $relatedArticle->title }}</h4>
                         </a>
-                    @endfor
+                    @endforeach
                 </div>
                 <h4 class="text-slate-700 font-medium my-4">Follow Us</h4>
                 <div class="space-y-2">
@@ -115,40 +100,46 @@
                 </div>
             </div>
         </div>
-        <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
             <!-- Header -->
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <h4 class="text-2xl font-medium text-slate-700">Recommendation Article</h4>
-                <a href="#" class="text-sm text-green-800 hover:text-green-700">Show All</a>
+                <a href="{{ route('article.index') }}" class="text-sm text-green-800 hover:text-green-700">Show All</a>
             </div>
 
             <!-- Artikel Grid -->
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mt-8">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="w-full flex gap-4 h-full group">
+                @foreach ($otherArticles as $otherArticle)
+                    <div
+                        class="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 group">
+
                         <!-- Gambar -->
-                        <div class="h-32 w-32 shrink-0 rounded overflow-hidden relative">
-                            <img src="{{ asset('assets/images/front.jpg') }}" alt=""
-                                class="w-full h-full object-cover object-center">
+                        <div class="h-32 w-32 shrink-0 rounded-lg overflow-hidden">
+                            <img src="{{ asset('storage/' . $otherArticle->image) }}" alt="Thumbnail"
+                                class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500">
                         </div>
 
-                        <!-- Konten -->
-                        <div class="flex flex-col justify-between gap-2 h-full">
-                            <h5 class="text-xs text-slate-600">Lifestyle | Januari 12, 2025</h5>
-
+                        <div class="flex flex-col justify-between h-full flex-1 gap-2">
+                            <h5 class="text-xs font-medium text-slate-500">
+                                {{ $otherArticle->category->name }} • {{ $otherArticle->created_at->format('F j, Y') }}
+                            </h5>
                             <h4
-                                class="text-base font-semibold text-slate-600 line-clamp-2 group-hover:text-slate-700 transition-colors duration-300">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quis!
+                                class="text-base font-semibold text-slate-700 line-clamp-2 mt-1 group-hover:text-green-700 transition-colors duration-300">
+                                {{ $otherArticle->title }}
                             </h4>
+                            <p class="line-clamp-2 text-sm">{{ $otherArticle->summary }}</p>
 
-                            <a href="#"
-                                class="flex items-center gap-1 text-sm font-medium text-green-800 hover:text-green-700 transition-colors duration-300">
+                            <a href="{{ route('article.show', $otherArticle->slug) }}"
+                                class="inline-flex items-center gap-1 text-sm font-medium text-green-700 hover:gap-2 transition-all duration-300 mt-2">
                                 Read more
-                                <span><i data-feather="arrow-right" class="size-3"></i></span>
+                                <span><i data-feather="arrow-right" class="size-4"></i></span>
                             </a>
                         </div>
                     </div>
-                @endfor
+                @endforeach
+            </div>
+            <div class="w-full">
+                {{ $otherArticles->links() }}
             </div>
         </div>
     </div>

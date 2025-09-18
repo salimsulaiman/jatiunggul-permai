@@ -33,20 +33,17 @@ class PropertyFeatureController extends Controller
     {
         $validated = $request->validate([
             'feature' => 'required|string|max:255',
-            'icon' => 'required|file|mimes:jpg,jpeg,png,svg,gif|max:2048',
+            'icon' => 'required|string|max:100',
             'description' => 'required|string',
             'property_id' => 'required|exists:properties,id',
         ]);
 
-
-        PropertyFeature::create([
-            ...$validated,
-            'icon' => $request->file('icon')->store('property_feature_images', 'public'),
-        ]);
+        PropertyFeature::create($validated);
 
         $property = Property::findOrFail($validated['property_id']);
 
-        return redirect()->route('admin.property.show',  $property->slug)->with('success', 'Property feature created successfully.');
+        return redirect()->route('admin.property.show', $property->slug)
+            ->with('success', 'Property feature created successfully.');
     }
 
     /**
@@ -73,7 +70,7 @@ class PropertyFeatureController extends Controller
         $rules = [
             'id' => 'required|exists:property_features,id',
             'feature' => 'required|string|max:255',
-            'icon' => 'nullable|file|mimes:jpg,jpeg,png,svg,gif|max:2048',
+            'icon' => 'required|string|max:100',
             'description' => 'required|string',
         ];
 
@@ -81,26 +78,18 @@ class PropertyFeatureController extends Controller
 
         $feature = PropertyFeature::findOrFail($validated['id']);
 
-        if ($request->hasFile('icon')) {
-            if ($feature->icon && Storage::disk('public')->exists($feature->icon)) {
-                Storage::disk('public')->delete($feature->icon);
-            }
-
-            $iconPath = $request->file('icon')->store('property_features_images', 'public');
-        } else {
-            $iconPath = $feature->icon;
-        }
-
         $feature->update([
             'feature' => $validated['feature'],
-            'icon' => $iconPath,
-            'description' => $validated['description']
+            'icon' => $validated['icon'],
+            'description' => $validated['description'],
         ]);
 
         $property = Property::findOrFail($feature->property->id);
 
-        return redirect()->route('admin.property.show',  $property->slug)->with('success', 'Property feature updated successfully.');
+        return redirect()->route('admin.property.show', $property->slug)
+            ->with('success', 'Property feature updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -115,14 +104,11 @@ class PropertyFeatureController extends Controller
 
         $feature = PropertyFeature::findOrFail($validated['id']);
 
-        if ($feature->icon && Storage::disk('public')->exists($feature->icon)) {
-            Storage::disk('public')->delete($feature->icon);
-        }
-
         $property = Property::findOrFail($feature->property_id);
 
         $feature->delete();
 
-        return redirect()->route('admin.property.show',  $property->slug)->with('success', 'Property feature deleted successfully.');
+        return redirect()->route('admin.property.show', $property->slug)
+            ->with('success', 'Property feature deleted successfully.');
     }
 }

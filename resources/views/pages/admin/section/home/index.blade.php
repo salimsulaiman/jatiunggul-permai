@@ -20,7 +20,7 @@
                 style="background-image: url('{{ $home_section->image ? asset('storage/' . $home_section->image) : asset('assets/images/house.jpg') }}')">
                 <div class="absolute w-full bg-black/65 md:bg-black/45 h-full"></div>
                 <div
-                    class="w-full max-w-6xl h-full px-4 sm:px-8 pt-20 sm:pt-8 pb-6 sm:pb-8 mx-auto flex flex-col justify-center items-start relative z-10">
+                    class="w-full max-w-7xl h-full px-4 sm:px-8 pt-20 sm:pt-8 pb-6 sm:pb-8 mx-auto flex flex-col justify-center items-start relative z-10">
 
                     <h4
                         class="px-3 sm:px-4 py-1.5 sm:py-2 bg-black/20 border border-white rounded-full text-white backdrop-blur-lg text-[11px] sm:text-xs">
